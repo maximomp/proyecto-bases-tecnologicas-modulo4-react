@@ -1,0 +1,140 @@
+[
+  {
+    "seller": "PcComponentes",
+    "novedad": true,
+    "id": 1,
+    "nombre": "Alturix Go Start Intel Celeron",
+    "precio": 189.99,
+    "precioOriginal": 279.99,
+    "descuento": 32,
+    "categorias": ["Básicos hasta 500€", "Perfectos para estudiantes"],
+    "atributos": {
+      "marca": "Alturix",
+      "tipoPortatil": "Básico",
+      "memoriaRam": "8GB",
+      "procesador": "Intel Celeron",
+      "tarjetaGrafica": "Integrada",
+      "idiomaTeclado": "Español",
+      "pulgadas": 15.6,
+      "sistemaOperativo": "Windows 11",
+      "almacenamientoSSD": "256GB",
+      "tipoPantalla": "IPS",
+      "inteligenciaArtificial": false,
+      "resolucion": "Full HD",
+      "frecuenciaRefresco": "60Hz",
+      "claseTeclado": "Estándar",
+      "conectividad": ["WiFi", "Bluetooth"],
+      "autonomia": "6h",
+      "tipoTecladoPortatil": "Estándar"
+    },
+    "destacados": ["Vuelta al cole"],
+    "imagen": "static/images/products/product-1.jpg",
+    "opiniones": 21,
+    "valoracion": 3.9,
+    "envioGratis": true,
+    "recibeManana": true,
+    "ventas": 521
+    "productUrl": "aqui va la url del producto"
+  }....todfos los demas 
+]
+
+    basate en esta estructura ahora crea un archivo products.json 
+
+    debes rellenarlo co los datos del archivo products_web.json 
+
+    debes rellenar obligatoriamente estos atributos pero modificando los valores básandote en los datos de products.json de cada item , el titulo da bastante informacion 
+
+
+      "marca": "PCCom",
+      "tipoPortatil": "Gaming",
+      "memoriaRam": "32GB",
+      "procesador": "Intel Core i9-14000HX",
+      "tarjetaGrafica": "RTX 4060",
+      "idiomaTeclado": "Español",
+      "pulgadas": 15.6,
+      "sistemaOperativo": "Windows 11",
+      "almacenamientoSSD": "1TB",
+      "tipoPantalla": "IPS",
+      "inteligenciaArtificial": true,
+      "resolucion": "QHD",
+      "frecuenciaRefresco": "165Hz",
+      "claseTeclado": "RGB",
+      "conectividad": ["WiFi", "Bluetooth", "Ethernet"],
+      "autonomia": "4h",
+      "tipoTecladoPortatil": "Gaming"
+
+    tambien teines que rellenar los destacados 
+
+    y rellenar las categorias segun creas conveniente en la informacion mostrada , las categorias son las siguientes auqneu sol odebes indicar el title , pueden tener mas de una 
+
+
+[
+    {
+      id: "gaming",
+      title: "Gaming",
+      alt: "gaming",
+      img: "static/images/categorization/use/gaming.png",
+    },
+    {
+      id: "gaming-advanced",
+      title: "Gaming avanzado",
+      alt: "gaming-advanced",
+      img: "static/images/categorization/use/gaming-avanzado.png",
+    },
+    {
+      id: "student-friendly",
+      title: "Perfectos para estudiantes",
+      alt: "student-friendly",
+      img: "static/images/categorization/use/perfectos-estudiantes.png",
+    },
+    {
+      id: "professional",
+      title: "Profesional",
+      alt: "professional",
+      img: "static/images/categorization/use/profesional.png",
+    },
+    {
+      id: "graphic-design",
+      title: "Diseño gráfico y edición",
+      alt: "graphic-design",
+      img: "static/images/categorization/use/diseno.png",
+    },
+    {
+      id: "basicos-500",
+      title: "Básicos hasta 500€",
+      alt: "basicos-500",
+      img: "static/images/categorization/use/basicos.png",
+    },
+    {
+      id: "ultraligeros",
+      title: "Ultraligeros",
+      alt: "ultraligeros",
+      img: "static/images/categorization/use/ultraligeros.png",
+    },
+    {
+      id: "macbook",
+      title: "MacBook",
+      alt: "macbook",
+      img: "static/images/categorization/use/macbook.png",
+    },
+    {
+      id: "reacondicionados-gaming",
+      title: "Reacondicionados gaming",
+      alt: "reacondicionados-gaming",
+      img: "static/images/categorization/use/reacondicionados-gaming.png",
+    },
+    {
+      id: "reacondicionados-ofimatica",
+      title: "Reacondicionados ofimática",
+      alt: "reacondicionados-ofimatica",
+      img: "static/images/categorization/use/reacondicionados-ofimatica.png",
+    },
+  ]
+
+
+    recuerda rellenar los datos de precio y ratings al completo 
+
+    extrae todos los datos sin interrumpir ni preguntarme 
+
+    recuerda que debes recorrer todos los items del archivo products_web.json y crear cada uno con todos estos pasos en products.json , no olvides ninguno i manten el orden 
+    

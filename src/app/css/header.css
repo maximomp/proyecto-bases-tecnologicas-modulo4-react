@@ -112,6 +112,7 @@ header {
   font-weight: 400;
   line-height: var(--font-caption-line-height);
   letter-spacing: var(--font-caption-letter-spacing);
+  margin-top: 1rem;
 }
 
 .breadcrumb a {
@@ -172,7 +173,7 @@ header {
 }
 
 .search-form-button {
-  height: 3.1rem;
+  height: 3rem;
   margin: 0;
   text-decoration: none;
   transition: transform 0.3s;
@@ -259,12 +260,12 @@ header {
 
 #my-account {
   grid-area: myaccount;
-  min-width: 110px;
+  /* min-width: 120px; */
 }
 
 #my-cart {
   grid-area: cart;
-  min-width: 110px;
+  /* min-width: 110px; */
 }
 
 .button-account-header {
@@ -283,9 +284,51 @@ header {
   text-decoration: none;
 }
 
+.text-account-header {
+  min-width: 90px;
+}
+
 .icons-button {
   width: 24px;
   height: 24px;
+}
+
+.header-ofertas {
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+  display: flex;
+  width: 100%;
+  grid-area: ofertas;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: right;
+}
+
+.header-ofertas > ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: flex-end;
+  /* alinea la lista a la derecha dentro de header-ofertas */
+}
+
+.header-ofertas > ul > li {
+  margin-right: 1rem;
+}
+
+.header-ofertas1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
 }
 
 @media (max-width: 1299px) {
@@ -321,16 +364,20 @@ header {
   .logo-desktop {
     display: none;
   }
+
   #my-cart,
   #my-account {
     min-width: 25px;
-    width: 2rem;
+    /* width: 2rem; */
+  }
+  .search {
+    padding-left: 0.5rem;
   }
   .search-form-input {
     height: 2.5rem;
   }
   .search-form-button {
-    height: 2.6rem;
+    height: 2.5rem;
     border-radius: 0 4px 4px 0;
   }
   .template {
@@ -365,6 +412,12 @@ header {
   }
   #my-cart {
     padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .template {
+    grid-template-columns: 10vw 10vw 40vw 38vw;
   }
 }
 

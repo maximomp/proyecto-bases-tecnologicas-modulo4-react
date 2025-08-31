@@ -1,9 +1,11 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import OptionFilter from "./optionFilter";
 import ProductsGridList from "./productsGridList";
+import CategorizationScrollControls from "./CategorizationScrollControls";
 import orderBy from "../../../utils/orderBy";
 import orderByValueFirst from "../../../utils/orderByValueFirst";
 import orderByComparison from "../../../utils/filterByComparison";
+import OrderByScrollControls from "./OrderByScrollControls";
 
 interface Filter {
   title?: string;
@@ -14,6 +16,7 @@ interface Filter {
   }>;
   formType?: string;
   name?: string;
+
   // Add other properties as needed
 }
 
@@ -25,6 +28,12 @@ interface DynamicFilterProps {
   idx?: number;
   products: any[];
   setProducts: any;
+  handleOpenClose: () => void;
+  handleToggleCategoryFilter: (filter: {
+    attributo?: string;
+    category?: string;
+    value: any;
+  }) => void;
 }
 const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
   const {
@@ -37,7 +46,7 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
     setProducts,
   } = props;
 
-  //length of producs
+  // longitud de productos (contador mostrado en la UI)
   const productCount = products.length;
 
   const [selectedOrderBy, setSelectedOrderBy] =
@@ -151,6 +160,7 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
     },
   ]);
 
+  // efecto de depuración: ver cambios en products
   useEffect(() => {
     console.log(
       "Products updated:",
@@ -159,6 +169,7 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
     );
   }, [products]);
 
+  // efecto vacío que depende del criterio de orden seleccionado (placeholder)
   useEffect(() => {}, [selectedOrderBy]);
 
   const handleOrderByChange = (event: any) => {
@@ -183,26 +194,91 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
     }
   };
 
+  // refs y estado para el desplazamiento horizontal de la barra de categorización
+  const categorizationRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [shiftX, setShiftX] = useState<number>(0);
+
+  // check overflow and adjust shift bounds
+  // categorization overflow logic moved into CategorizationScrollControls component
+
+  // desplaza en pasos de 100px: dir=+1 mueve a la derecha (muestra items anteriores)
+  const shift = (dir: number) => {
+    const wrapper = wrapperRef.current;
+    const inner = categorizationRef.current;
+    if (!wrapper || !inner) return;
+    const maxNegative = Math.min(0, wrapper.clientWidth - inner.scrollWidth);
+    let newShift = shiftX + dir * 100;
+    if (newShift > 0) newShift = 0;
+    if (newShift < maxNegative) newShift = maxNegative;
+    setShiftX(newShift);
+  };
+
+  // --- estado/funciones para el scroller del order-by (la lógica de overflow está en el componente) ---
+  const orderByWrapperRef = useRef<HTMLDivElement | null>(null);
+  const orderByInnerRef = useRef<HTMLDivElement | null>(null);
+  const [orderByShift, setOrderByShift] = useState<number>(0);
+
+  const shiftOrderBy = (dir: number) => {
+    const wrapper = orderByWrapperRef.current;
+    const inner = orderByInnerRef.current;
+    if (!wrapper || !inner) return;
+    const maxNegative = Math.min(0, wrapper.clientWidth - inner.scrollWidth);
+    let newShift = orderByShift + dir * 100;
+    if (newShift > 0) newShift = 0;
+    if (newShift < maxNegative) newShift = maxNegative;
+    setOrderByShift(newShift);
+  };
+
+  // la comprobación de overflow y el clamping se realizan dentro de OrderByScrollControls
+
   return (
     <div className="products-grid-container" data-key="products-grid-container">
-      <div className="products-grid-use-categorization">
-        {/* Mapeo de categorías de uso */}
-        {categorizationUse.map((use) => (
-          <div
-            key={use.id}
-            className="use-categorization"
-            data-key={`use-categorization-${use.id}`}
-          >
-            <div className="use-categorization-image-container">
-              <img title={use.title} alt={use.alt} src={use.img} />
+      <div
+        className="products-grid-use-categorization-wrapper"
+        ref={wrapperRef}
+      >
+        {/* Left/Right controls (visible only when overflow present); hide when at ends */}
+        <CategorizationScrollControls
+          wrapperRef={wrapperRef}
+          innerRef={categorizationRef}
+          shiftX={shiftX}
+          onShift={shift}
+          setShift={setShiftX}
+        />
+
+        <div
+          ref={categorizationRef}
+          className="products-grid-use-categorization"
+          style={{
+            transform: `translateX(${shiftX}px)`,
+            transition: "transform 200ms ease",
+          }}
+        >
+          {/* Mapeo de categorías de uso */}
+          {categorizationUse.map((use) => (
+            <div
+              key={use.id}
+              className="use-categorization"
+              data-key={`use-categorization-${use.id}`}
+              onClick={() =>
+                props.handleToggleCategoryFilter({
+                  category: "uso",
+                  value: use.title,
+                })
+              }
+            >
+              <div className="use-categorization-image-container">
+                <img title={use.title} alt={use.alt} src={use.img} />
+              </div>
+              <div className="use-categorization-text">
+                <h3 title={use.title} className="sc-kueqoe xCPCI">
+                  {use.title}
+                </h3>
+              </div>
             </div>
-            <div className="use-categorization-text">
-              <h3 title={use.title} className="sc-kueqoe xCPCI">
-                {use.title}
-              </h3>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <div className="products-grid-orderby">
@@ -220,10 +296,44 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
             </div>
           </div>
         </button>
-        <span id="action-bar-total-products">{productCount} artículos</span>
-        {/* Filtros de ordenamiento */}
-        <div className="orderby-filters-container">
-          <div className="orderby-filters-container-buttons">
+
+        <span id="action-bar-total-products">
+          <span
+            className="filters-button-container"
+            onClick={() => props.handleOpenClose()}
+          >
+            <svg
+              className="filters-button-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              enableBackground="new 0 0 24 24"
+              fill="white"
+            >
+              <path d="M19 9c1.7 0 3-1.3 3-3s-1.3-3-3-3c-1.3 0-2.4.8-2.8 2H2v2h14.2c.4 1.2 1.5 2 2.8 2zm0-4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zM9 9c-1.3 0-2.4.8-2.8 2H2v2h4.2c.4 1.2 1.5 2 2.8 2s2.4-.8 2.8-2H22v-2H11.8c-.4-1.2-1.5-2-2.8-2zm0 4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zM19 15c-1.3 0-2.4.8-2.8 2H2v2h14.2c.4 1.2 1.5 2 2.8 2 1.7 0 3-1.3 3-3s-1.3-3-3-3zm0 4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"></path>
+            </svg>
+            <span className="filters-button-text">Filtrar</span>
+          </span>
+          {productCount} artículos
+        </span>
+        {/* Filtros de ordenamiento - use existing container as wrapper (do not change classes) */}
+        <div
+          className="orderby-filters-container"
+          ref={orderByWrapperRef}
+          style={{ position: "relative" }}
+        >
+          <OrderByScrollControls
+            wrapperRef={orderByWrapperRef}
+            innerRef={orderByInnerRef}
+            shiftX={orderByShift}
+            onShift={shiftOrderBy}
+            setShift={setOrderByShift}
+          />
+
+          <div
+            className="orderby-filters-container-buttons"
+            ref={orderByInnerRef}
+            style={{ transform: `translateX(${orderByShift}px)` }}
+          >
             {orderBySelectors.map((selector) => (
               <button
                 key={selector.id}
@@ -237,6 +347,7 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
           </div>
         </div>
       </div>
+
       <div className="products-grid" data-key="products-grid">
         <ProductsGridList products={products} filter={filter} />
       </div>

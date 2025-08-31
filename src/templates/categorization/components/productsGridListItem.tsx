@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import OptionFilter from "./optionFilter";
 
 interface Product {
+  productUrl: string | undefined;
   imagen: string | Blob | undefined;
   nombre: string;
   precio: string;
@@ -21,7 +22,7 @@ const ProductsGridListItem: React.FC<ProductsGridListItemProps> = ({
 }) => {
   return (
     <a
-      href="#"
+      href={product.productUrl}
       className="product-grid-product"
       title={product.nombre}
       data-key={dataKey}

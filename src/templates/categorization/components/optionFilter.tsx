@@ -64,16 +64,16 @@ const OptionFilter: React.FC<OptionFilterProps> = (props) => {
     selectedFilters.atributos &&
     Array.isArray(selectedFilters.atributos[String(filter.name)])
   ) {
-    isSelected = selectedFilters.atributos[String(filter.name)].includes(
-      option.value
-    );
+    isSelected = selectedFilters.atributos[String(filter.name)]
+      .map((v: any) => String(v))
+      .includes(String(option.value));
   }
 
   // add filter to selection state
   const addFilterToSelection = (e: React.MouseEvent<HTMLLIElement>) => {
     const input = e.currentTarget.querySelector("input");
     if (!input) return;
-    const optionValue = input.value;
+    const optionValue = String(input.value);
     const optionLabel = option.label;
     const selectedOption = { filter: filter.name, value: optionValue };
     console.log("selectedOption", selectedOption, option, optionValue, filter);
@@ -83,7 +83,7 @@ const OptionFilter: React.FC<OptionFilterProps> = (props) => {
         const currentValues = Array.isArray(
           prev["atributos"]?.[String(filter.name)]
         )
-          ? prev["atributos"]?.[String(filter.name)]
+          ? prev["atributos"]?.[String(filter.name)].map((v: any) => String(v))
           : [];
         let newValues;
         // Detectar si el valor está seleccionado en el array actual

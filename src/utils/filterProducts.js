@@ -24,8 +24,26 @@ function filterProducts(productos, filtros = {}) {
     // Filtrar por atributos (si se especifica)
     if (filtros.atributos) {
       for (const [key, valores] of Object.entries(filtros.atributos)) {
-        if (valores.length > 0 && !valores.includes(producto.atributos[key])) {
-          return false;
+        if (!valores || valores.length === 0) continue;
+
+        const prodAttr = producto.atributos
+          ? producto.atributos[key]
+          : undefined;
+
+        // Normalizar a strings para evitar fallos por comparaciones estrictas
+        const valoresStr = valores.map((v) => String(v));
+
+        if (Array.isArray(prodAttr)) {
+          // Si el atributo del producto es un array, comprobar intersección
+          const prodAttrStrs = prodAttr.map((v) => String(v));
+          const hasAny = prodAttrStrs.some((v) => valoresStr.includes(v));
+          if (!hasAny) return false;
+        } else {
+          const prodValStr =
+            prodAttr !== undefined && prodAttr !== null
+              ? String(prodAttr)
+              : undefined;
+          if (!valoresStr.includes(prodValStr)) return false;
         }
       }
     }
