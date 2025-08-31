@@ -1,0 +1,35 @@
+/* Fuente Open Sans local: usando archivos .ttf */
+@font-face {
+  font-family: "Open Sans";
+  src: url("/static/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("/static/fonts/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+a,
+a:visited {
+  cursor: pointer;
+  color: var(--color-black);
+}
+
+header {
+  max-width: 1551px;
+  /* border: 1px solid black; */
+  margin-left: auto;
+  margin-right: auto;
+  top: 0.5rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+}

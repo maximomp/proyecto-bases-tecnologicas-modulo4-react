@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+body {
+  display: block;
+}
+:root {
+  --color-brand-dark: #cc4d00;
+  --color-brand-main: #ff6000;
+  --color-brand-light: #ffa066;
+  --color-brand-lighter: #ffd8c1;
+  --color-brand-ultra-lighter: #ffeade;
+  --color-brand-blue-dark: #090029;
+  --color-brand-blue-main: #170453;
+  --color-brand-blue-light: #51437e;
+  --color-brand-blue-lighter: #c5c0d4;
+  --color-secondary-dark: #005486;
+  --color-secondary-main: #0069a7;
+  --color-secondary-light: #cce1ed;
+  --color-success-dark: #126805;
+  --color-success-main: #118000;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  height: 100%;
+  --color-danger-lighter: #f7c5cb;
+  --color-environment-percent40: #6e6e6e;
+  --color-environment-percent35: #a6a6a6;
+  --color-environment-percent20: #ccc;
+  --color-environment-percent10: #e6e6e6;
+  --color-environment-percent05: #f2f2f2;
+  --color-black: #333;
+  --color-white: #fff;
+  --color-avatar-digit0: #4fb0b3;
+  --color-avatar-digit1: #a90016;
+  --color-avatar-digit2: #0069a7;
+  --color-avatar-digit3: #107b00;
+  --color-avatar-digit4: #ffa90d;
+  --color-avatar-digit5: #ff6000;
+  --color-avatar-digit6: #4fb363;
+  --color-avatar-digit7: #b3884f;
+  --color-avatar-digit8: #b34f94;
+  --color-avatar-digit9: #7733b1;
+  --color-chat-message-text: #888;
+  --color-chat-message-client: #f2f2f2;
+  --color-chat-message-atc: #f7e7cc;
+  --color-chat-message-name: #444;
+  --color-chat-form-button-wrapper-bg: #f2f2f2;
+  --color-chat-form-button-wrapper-border: #dedede;
+  --color-chat-form-button-text: #888;
+  --color-chat-form-error: #ef4f4a;
+  --color-chat-form-success: #5cb85c;
+  --color-timeline-succeed: #107b00;
+  --color-table-header: #d2d2d2;
+  --color-table-readed-row: #eceeef;
+  --color-table-text: #888;
+  --color-table-title-text: #444;
+  --spacing-0025: 0.125rem;
+  --spacing-005: 0.25rem;
+  --spacing-01: 0.5rem;
+  --spacing-02: 1rem;
+  --spacing-03: 1.5rem;
+  --spacing-04: 2rem;
+  --spacing-05: 2.5rem;
+  --spacing-06: 3rem;
+  --spacing-07: 3.5rem;
+  --spacing-08: 4rem;
+  --spacing-09: 4.5rem;
+  --spacing-10: 5rem;
+  --spacing-11: 5.5rem;
+  --z-index-deep: -10;
+  --z-index-base: 0;
+  --z-index-default: 1;
+  --z-index-masked: 100;
+  --z-index-mask: 200;
+  --z-index-sticky: 300;
+  --z-index-header: 400;
+  --z-index-toast: 500;
+  --z-index-dropdown: 600;
+  --z-index-overlay: 700;
+  --z-index-menu: 750;
+  --z-index-spinner: 800;
+  --z-index-modal: 900;
+  --z-index-popup: 1000;
+  --layout-grid-width: 101.5rem;
+  --layout-grid-columns: 12;
+  --header-height-desktop: 7.625rem;
+  --header-height-top-desktop: 5.0625rem;
+  --header-height-bottom-desktop: 2.5625rem;
+  --header-height-simple: 3rem;
+  --header-checkout-desktop: 7rem;
+  --header-checkout-simple: 3rem;
+  --font-family-global: open sans, open-sans, sans-serif;
+  --font-body1-size: 1.0625rem;
+  --font-body1-line-height: 1.5rem;
+  --font-body1-letter-spacing: normal;
+  --font-body2-size: 0.875rem;
+  --font-body2-line-height: 1.25rem;
+  --font-body2-letter-spacing: normal;
+  --font-caption-size: 0.75rem;
+  --font-caption-line-height: 1rem;
+  --font-caption-letter-spacing: 0.025rem;
+  --font-display-size: 3rem;
+  --font-display-line-height: 4.063rem;
+  --font-display-letter-spacing: -0.031rem;
+  --font-h1-size: 1.8125rem;
+  --font-h1-line-height: 2.5rem;
+  --font-h2-size: 1.5rem;
+  --font-h2-line-height: 2rem;
+  --font-h3-size: 1.25rem;
+  --font-h3-line-height: 1.75rem;
+  .breadcrumbA {
+    color: var(--color-black);
+    text-decoration: none;
+    position: relative;
+    font-family: var(--font-family-global);
+    font-size: var(--font-body2-size);
+    font-weight: 400;
+    line-height: var(--font-body2-line-height);
+    letter-spacing: var(--font-body2-letter-spacing);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    min-height: 1.25rem;
+    margin-right: 0.4rem;
+  }
+  .breadcrumbImg {
+    width: var(--spacing-02);
+    height: var(--spacing-02);
+    margin-top: 2px;
+    margin-right: var(--spacing-01);
+    align-self: center;
+  }
+  --elevation-focus: 0 0 0.25rem #0069a7;
+}
+
+.template {
+  display: grid;
+  grid-template-columns: auto auto 1fr 1fr;
+  grid-template-areas:
+    "logo categorias search acciones"
+    "breadcrumb breadcrumb breadcrumb breadcrumb"
+    "title-container title-container title-container title-container";
+  align-items: center;
+  gap: 0; /* Sin espacio entre logo y categorías */
+  /* border: 1px solid #444;
+  padding: 0 1rem; */
+  background: #fff;
+}
+
+/* Ejemplo de uso: */
+.logo {
+  grid-area: logo;
+}
+.categorias {
+  grid-area: categorias;
+  padding-left: 2rem;
+}
+
+.pc-categorias-text {
+  font-family: var(--font-family-global);
+  font-size: var(--font-body1-size);
+  font-weight: 400;
+  line-height: var(--font-body1-line-height);
+  letter-spacing: var(--font-body1-letter-spacing);
+  margin-left: var(--spacing-01);
+  text-align: left;
+  line-height: 1.2;
+}
+.pc-categorias-icon {
+  fill: var(--color-black);
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  align-self: center;
+  display: inline-flex;
+  box-sizing: inherit;
+}
+
+.pc-categorias-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  height: 100%;
+}
+
+.search {
+  grid-area: search;
+  padding-left: 5rem;
+  height: 100%;
+  position: relative; /* Añade esto */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre elementos, ajusta si lo quieres más pegado */
+}
+
+.pc-search-input {
+  margin-left: 0.5rem; /* Si quieres aún más pegado, usa 0 o menos */
+}
+
+.pc-catalogo-select {
+  width: 206px;
+  max-width: 216px;
+  /* appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+  background-color: white;
+  border: 1px solid #ccc;
+  /* background: #fff url("static/images/dropdown-svgrepo-com.svg") no-repeat right
+    0.75em center/1em; */
+  font-family: var(--font-family-global);
+  font-size: 0.875rem;
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid rgb(204, 204, 204);
+  padding-left: 10px;
+  height: 45px;
+  display: flex;
+  grid-template-columns: auto auto 1fr 1fr;
+  grid-template-areas: "logo categorias search acciones";
+  align-items: center;
+  position: relative;
+}
+.dropdown-icon {
+  position: absolute;
+  right: 0.5rem; /* Ajusta el margen derecho */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  margin-left: 0;
+  display: block;
+  pointer-events: none;
+}
+.acciones {
+  grid-area: acciones;
+}
+
+.header {
+  max-width: 1551px;
+  /* border: 1px solid black; */
+  margin-left: auto;
+  margin-right: auto;
+  top: 0.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb {
+  grid-area: breadcrumb;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-caption-size);
+  font-weight: 400;
+  line-height: var(--font-caption-line-height);
+  letter-spacing: var(--font-caption-letter-spacing);
+}
+
+.breadcrumb a {
+  color: var(--color-black);
+  text-decoration: none;
+  position: relative;
+  font-family: var(--font-family-global);
+  font-size: var(--font-body2-size);
+  font-weight: 400;
+  line-height: var(--font-body2-line-height);
+  letter-spacing: var(--font-body2-letter-spacing);
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  width: fit-content;
+  min-height: 1.25rem;
+
+  text-decoration: none;
+  margin-right: 0.4rem;
+}
+
+.breadcrumb img {
+  width: var(--spacing-02);
+  height: var(--spacing-02);
+  margin-top: 2px;
+  margin-right: var(--spacing-01);
+  align-self: center;
+}
+.title-container {
+  grid-area: title-container;
+  padding: 1rem 0;
+}
+.title-container h1 {
+  font-size: 1.8125rem;
+  line-height: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: rgb(51, 51, 51);
+  font-family: var(--font-family-global);
+  font-size: var(--font-h1-size);
+  font-weight: 700;
+  line-height: var(--font-h1-line-height);
+}
+.title-container p {
+  font-family: var(--font-family-global);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.025rem;
+  display: block;
+}
