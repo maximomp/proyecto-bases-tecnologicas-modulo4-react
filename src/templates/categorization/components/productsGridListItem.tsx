@@ -23,6 +23,7 @@ const ProductsGridListItem: React.FC<ProductsGridListItemProps> = ({
   return (
     <a
       href={product.productUrl}
+      rel="noopener"
       className="product-grid-product"
       title={product.nombre}
       data-key={dataKey}
