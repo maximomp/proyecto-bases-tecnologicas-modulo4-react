@@ -35,4 +35,4 @@ const nuevos = productos.map((p, i) => {
 });
 
 fs.writeFileSync(file, JSON.stringify(nuevos, null, 2));
-console.log("Productos normalizados con sellers y novedad variados.");
+//console.og"Productos normalizados con sellers y novedad variados.");

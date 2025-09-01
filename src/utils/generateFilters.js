@@ -101,5 +101,5 @@ Ejemplo de uso:
 const productos = require('../../../templates/categorization/components/productos.json');
 const generateFilters = require('./generateFilters');
 const filtrosLaterales = generateFilters(productos);
-console.log(filtrosLaterales);
+//console.ogfiltrosLaterales);
 */

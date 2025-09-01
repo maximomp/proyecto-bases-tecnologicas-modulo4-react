@@ -69,13 +69,13 @@ const Categorization: React.FC = () => {
     fetchData();
   }, []);
 
-  console.log("Selected Filters:", selectedFilters);
+  //console.og"Selected Filters:", selectedFilters);
 
-  console.log("Filters:", dynamicFilters);
+  //console.og"Filters:", dynamicFilters);
 
   useEffect(() => {});
 
-  console.log(dynamicFilters);
+  //console.ogdynamicFilters);
 
   const dynamicFiltersProps = {
     dynamicFilters,
@@ -190,11 +190,11 @@ const Categorization: React.FC = () => {
         const filteredProducts = filterProducts(productsRaw, selectedFilters);
         setProducts(filteredProducts);
         //   setProducts(orderBy(productsRaw, "precio", "asc"));
-        console.log("Filtered Products:", filteredProducts);
+        //console.og"Filtered Products:", filteredProducts);
       }
       fetchData();
     } else {
-      console.log("No selected filters, resetting products", products);
+      //console.og"No selected filters, resetting products", products);
       async function fetchData() {
         const [filtrosRaw, productsRaw] = await cargarFiltros();
         setProducts(orderBy(productsRaw, "precio", "asc"));

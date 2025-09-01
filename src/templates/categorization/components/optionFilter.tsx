@@ -76,7 +76,7 @@ const OptionFilter: React.FC<OptionFilterProps> = (props) => {
     const optionValue = String(input.value);
     const optionLabel = option.label;
     const selectedOption = { filter: filter.name, value: optionValue };
-    console.log("selectedOption", selectedOption, option, optionValue, filter);
+    //console.og"selectedOption", selectedOption, option, optionValue, filter);
     if (setSelectedFilters) {
       setSelectedFilters((prev: any) => {
         let toReturn = prev;

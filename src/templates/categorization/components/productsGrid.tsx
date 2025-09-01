@@ -161,13 +161,7 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
   ]);
 
   // efecto de depuración: ver cambios en products
-  useEffect(() => {
-    console.log(
-      "Products updated:",
-      products,
-      orderBy(products, "precio", "desc")
-    );
-  }, [products]);
+  useEffect(() => {}, [products]);
 
   // efecto vacío que depende del criterio de orden seleccionado (placeholder)
   useEffect(() => {}, [selectedOrderBy]);
@@ -175,7 +169,6 @@ const ProductsGrid: React.FC<DynamicFilterProps> = (props) => {
   const handleOrderByChange = (event: any) => {
     const id = event.currentTarget.id;
     setSelectedOrderBy(id);
-    console.log("Order by changed to:", id, event.currentTarget, event);
     // poner
     if (id === "sorting-relevance") {
       setProducts(orderBy(products, "valoracion", "desc"));

@@ -101,26 +101,10 @@ function mapAttributes(item) {
   const memoriaRam = (title.match(/(\d{1,3}GB)/i) || [""])[0] || "8GB";
   const almacenamientoSSD =
     (title.match(/(\d{1,2}TB|\d{2,4}GB)/i) || [""])[0] || "256GB";
-
-  // Extract screen size (pulgadas) robustly:
-  // - common formats: 15.6" 15.6 '' 15.6 pulgadas 15.6in 15.6 inches
-  // - fallback to known integer sizes if explicit symbol isn't present
-  let pulgadas = null;
-  const inchMatch = title.match(/(\d{1,2}(?:[.,]\d)?)\s*(?:\"|''|\u2033|\u2032|”|“|inches|inch|in|pulgadas|')/i);
-  if (inchMatch) {
-    pulgadas = parseFloat(inchMatch[1].replace(',', '.'));
-  } else {
-    // try matching common sizes present as standalone tokens (e.g. 13.6, 15.6, 17.3, 14, 16)
-    const sizesRegex = /\b(13\.6|13\.3|13|14|15\.6|15|16|17\.3|17|18)\b/i;
-    const sMatch = title.match(sizesRegex);
-    if (sMatch) pulgadas = parseFloat(sMatch[1].replace(',', '.'));
-    else if (item.img_file) {
-      // fallback: look into the image filename for common sizes (some filenames include 156 for 15.6)
-      const imgMatch = item.img_file.match(/(13\.6|13\.3|13|14|15\.6|15|16|17\.3|17|18)/i);
-      if (imgMatch) pulgadas = parseFloat(imgMatch[1].replace(',', '.'));
-    }
-  }
-  if (!pulgadas) pulgadas = 15.6;
+  const pulgadas =
+    parseNumberFromText(title, /([0-9]{1,2}(?:\.|,)?[0-9]?)\"/) ||
+    parseNumberFromText(title, /(\d{1,2}(?:\.|,)\d)/) ||
+    15.6;
   const procesador =
     (title.match(
       /(Intel Core [iI]\d[-\w\d]*|Intel Core Ultra [\w\d-]*|Intel Evo [^/\s]+|AMD Ryzen( AI)? [\w\d-]*|Apple M\d[\w-]*)/i
@@ -253,12 +237,12 @@ function main() {
     const transformed = transformItem(idx, item);
     out.push(transformed);
     if ((idx + 1) % 10 === 0) {
-      console.log(`Processed ${idx + 1} items`);
+      //console.og`Processed ${idx + 1} items`);
     }
   });
 
   fs.writeFileSync(outputPath, JSON.stringify(out, null, 2), "utf8");
-  console.log(`Wrote ${out.length} items to ${outputPath}`);
+  //console.og`Wrote ${out.length} items to ${outputPath}`);
 }
 
 main();

@@ -85,10 +85,10 @@ function downloadToFile(url, dest) {
 (async () => {
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
-    console.log("Created directory", outDir);
+    //console.og"Created directory", outDir);
   }
 
-  console.log(`Starting download of ${products.length} images to ${outDir}`);
+  //console.og`Starting download of ${products.length} images to ${outDir}`);
 
   const results = [];
   const concurrency = 5;
@@ -132,7 +132,7 @@ function downloadToFile(url, dest) {
           path: item.imagen,
         });
         if ((idx + 1) % 10 === 0)
-          console.log(`Downloaded ${idx + 1}/${products.length}`);
+          //console.og`Downloaded ${idx + 1}/${products.length}`);
       } catch (err) {
         console.error(`(${idx + 1}) Error downloading ${remote}:`, err.message);
         results.push({
@@ -152,10 +152,10 @@ function downloadToFile(url, dest) {
 
   // write back products.json with updated imagen fields
   fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), "utf8");
-  console.log("Updated products.json with local image paths.");
+  //console.og"Updated products.json with local image paths.");
 
   const okCount = results.filter((r) => r.ok).length;
-  console.log(
+  //console.og
     `Finished. Success: ${okCount}, Fail: ${results.length - okCount}`
   );
 })();
